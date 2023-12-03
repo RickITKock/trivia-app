@@ -14,15 +14,16 @@
     <div th:if="${questions}">
         <p>Questions are available</p>
         <form action="#" th:action="@{/answers}" th:object="${questions}" method="post">
-            <ul>
-                <li th:each="question : ${questions.getPreparedMultipleChoiceQuestions()}">
-                    <p th:text="${question.question}">Question text here</p>
-                    <ol>
-                        <li th:each="answer : ${question.allPossibleAnswers}" th:text="${answer}">Answer text</li>
-                    </ol>
-                </li>
-            </ul>
-            <button type="submit">Submit</button>
+            <div th:each="question, iterStat : ${questions.getPreparedMultipleChoiceQuestions()}">
+                <p th:text="${question.question}">Question text here</p>
+                <ol>
+                    <li th:each="answer : ${question.allPossibleAnswers}">
+                        <input type="radio" th:name="|answer${iterStat.index}|" th:value="${answer}" />
+                        <span th:text="${answer}">Answer text</span>
+                    </li>
+                </ol>
+            </div>
+            <input type="submit" value="Submit Answers">
         </form>
     </div>
     <div th:unless="${questions}">

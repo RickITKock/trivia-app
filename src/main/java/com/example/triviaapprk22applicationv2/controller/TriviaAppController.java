@@ -9,7 +9,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.client.RestTemplate;
+
+import java.util.Map;
 
 @Controller
 public class TriviaAppController {
@@ -40,8 +43,9 @@ public class TriviaAppController {
     }
 
     @PostMapping(value = "/answers")
-    public String showAnswers(Model model) {
-        System.out.println(model.toString());
+    public String showAnswers(@RequestParam Map<String, String> allParams, Model model) {
+        System.out.println("Parameters are " + allParams);
+        // Process the answers here
         return "answers";
     }
 
