@@ -34,6 +34,7 @@ public class TriviaAppController {
 
     @GetMapping(value = "/questions")
     public String showTriviaApp(Model model) {
+        model.addAttribute("questions", this.builder);
         return "questions";
     }
 

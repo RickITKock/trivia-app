@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Trivia Questions</title>
     <style>
         ul {
             list-style-type: none;
@@ -11,8 +11,22 @@
 </head>
 <body>
 <div th:class="container">
-    <h1>Trivia application</h1>
-    <p>Hello world!</p>
+    <div th:if="${questions}">
+        <p>Questions are available</p>
+        <form>
+            <ul>
+                <li th:each="question : ${questions.getPreparedMultipleChoiceQuestions()}">
+                    <p th:text="${question.question}">Question text here</p>
+                    <ol>
+                        <li th:each="answer : ${question.allPossibleAnswers}" th:text="${answer}">Answer text</li>
+                    </ol>
+                </li>
+            </ul>
+        </form>
+    </div>
+    <div th:unless="${questions}">
+        <p>No questions available.</p>
+    </div>
 </div>
 </body>
 </html>
