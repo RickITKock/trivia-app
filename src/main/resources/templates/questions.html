@@ -13,7 +13,7 @@
 <div th:class="container">
     <div th:if="${questions}">
         <p>Questions are available</p>
-        <form>
+        <form action="#" th:action="@{/answers}" th:object="${questions}" method="post">
             <ul>
                 <li th:each="question : ${questions.getPreparedMultipleChoiceQuestions()}">
                     <p th:text="${question.question}">Question text here</p>
@@ -22,6 +22,7 @@
                     </ol>
                 </li>
             </ul>
+            <button type="submit">Submit</button>
         </form>
     </div>
     <div th:unless="${questions}">

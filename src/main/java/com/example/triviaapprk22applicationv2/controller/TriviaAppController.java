@@ -8,6 +8,7 @@ import com.example.triviaapprk22applicationv2.service.TriviaAppService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.client.RestTemplate;
 
 @Controller
@@ -36,6 +37,12 @@ public class TriviaAppController {
     public String showTriviaApp(Model model) {
         model.addAttribute("questions", this.builder);
         return "questions";
+    }
+
+    @PostMapping(value = "/answers")
+    public String showAnswers(Model model) {
+        System.out.println(model.toString());
+        return "answers";
     }
 
     private String constructFullPathToApi(String uri, String parameterName, String value) {
