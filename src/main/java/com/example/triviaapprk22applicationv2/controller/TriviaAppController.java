@@ -57,6 +57,8 @@ public class TriviaAppController {
             System.out.println(answer.toString());
         }
 
+        model.addAttribute("answers", answers);
+
         return "answers";
     }
 
