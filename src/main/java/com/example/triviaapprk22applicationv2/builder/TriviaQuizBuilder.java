@@ -17,6 +17,7 @@ public class TriviaQuizBuilder {
         PreparedMultipleChoiceQuestion[] preparedMultipleChoiceQuestions = new PreparedMultipleChoiceQuestion[multipleChoiceQuestions.length];
         for (int i = 0 ; i < preparedMultipleChoiceQuestions.length; i++) {
             preparedMultipleChoiceQuestions[i] = getPreparedMultipleChoiceQuestion(multipleChoiceQuestions[i]);
+            preparedMultipleChoiceQuestions[i].setId(i);
         }
         return preparedMultipleChoiceQuestions;
     }
@@ -24,6 +25,7 @@ public class TriviaQuizBuilder {
     public PreparedMultipleChoiceQuestion getPreparedMultipleChoiceQuestion(MultipleChoiceQuestion multipleChoiceQuestion) {
         PreparedMultipleChoiceQuestion preparedMultipleChoiceQuestion = new PreparedMultipleChoiceQuestion();
         preparedMultipleChoiceQuestion.setQuestion(multipleChoiceQuestion.getQuestion());
+        preparedMultipleChoiceQuestion.setCorrectAnswer(multipleChoiceQuestion.getCorrectAnswer());
         String [] incorrectAnswers = multipleChoiceQuestion.getIncorrectAnswers();
         String [] allPossibleAnswers = new String[incorrectAnswers.length + 1];
         for (int i = 0 ; i < incorrectAnswers.length; i++) {

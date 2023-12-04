@@ -3,7 +3,11 @@ package com.example.triviaapprk22applicationv2.model.triviadata;
 import java.util.Arrays;
 
 public class PreparedMultipleChoiceQuestion {
+    private int id;
+
     private String question;
+
+    private String correctAnswer;
     private String[] allPossibleAnswers;
 
     public String getQuestion() {
@@ -14,12 +18,28 @@ public class PreparedMultipleChoiceQuestion {
         this.question = question;
     }
 
+    public void setCorrectAnswer(String correctAnswer) {
+        this.correctAnswer = correctAnswer;
+    }
+
+    public String getCorrectAnswer() {
+        return this.correctAnswer;
+    }
+
     public String[] getAllPossibleAnswers() {
         return allPossibleAnswers;
     }
 
     public void setAllPossibleAnswers(String[] allPossibleAnswers) {
         this.allPossibleAnswers = allPossibleAnswers;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     @Override

@@ -44,8 +44,32 @@ public class TriviaAppController {
 
     @PostMapping(value = "/answers")
     public String showAnswers(@RequestParam Map<String, String> allParams, Model model) {
-        System.out.println("Parameters are " + allParams);
-        // Process the answers here
+        PreparedMultipleChoiceQuestion[] questions = builder.getPreparedMultipleChoiceQuestions();
+
+        // Go through each question and check which have been correctly answered
+
+        // Create an object that hold the information we need to represent in view
+        // The object contains:
+        // - a list of questions with the question,
+        // - the correct answer,
+        // - the submitted answer
+        // - and a boolean to indicate if the submitted answer is correct or not
+
+        for (PreparedMultipleChoiceQuestion question : questions) {
+            String correctAnswer = question.getCorrectAnswer();
+            // Assuming allParams is a Map<String, String>
+            String submittedAnswer = allParams.get("answer" + question.getId()); // Assuming each question has an ID
+            submittedAnswer = submittedAnswer != null ? submittedAnswer.trim() : "";
+
+            System.out.println("Correct answer:\t" + correctAnswer);
+            System.out.println("Submitted answer:\t" + submittedAnswer);
+
+            // Compare the correct answer to the submitted answer
+            boolean isCorrect = correctAnswer.trim().equalsIgnoreCase(submittedAnswer);
+            System.out.println("Answer is " + (isCorrect ? "correct" : "incorrect"));
+        }
+
+
         return "answers";
     }
 
