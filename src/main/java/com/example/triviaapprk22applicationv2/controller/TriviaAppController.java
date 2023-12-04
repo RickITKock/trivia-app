@@ -36,12 +36,6 @@ public class TriviaAppController {
         this.service = new TriviaAppService(repository);
         String uri = constructFullPathToApi(OPENTDB_BASE_URI, "amount", String.valueOf(NUMBER_OF_QUESTIONS));
         this.questions = this.service.getQuestions(uri);
-
-        for (int i = 0 ; i < questions.length; i++) {
-            Question question = questions[i];
-            question.prepareAllPossibleAnswers();
-            question.setId(i);
-        }
     }
 
     @GetMapping(value = "/questions")

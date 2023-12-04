@@ -8,8 +8,7 @@ import java.util.concurrent.ThreadLocalRandom;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class Question {
-    private static int id;
-
+    private UUID id = UUID.randomUUID();
     private String category;
     private String type;
     private String difficulty;
@@ -72,13 +71,13 @@ public class Question {
         this.correctAnswer = correctAnswer;
     }
 
-    public int getId() {
+    public UUID getId() {
         return id;
     }
 
-    public void setId(int id) {
-        this.id = id;
-    }
+//    public void setId(int id) {
+//        this.id = id;
+//    }
 
     public ArrayList<String> getAllPossibleAnswers() {
         return allPossibleAnswers;
