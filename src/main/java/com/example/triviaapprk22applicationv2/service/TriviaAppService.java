@@ -2,7 +2,7 @@ package com.example.triviaapprk22applicationv2.service;
 
 import com.example.triviaapprk22applicationv2.exceptions.ResourceUnavailableException;
 import com.example.triviaapprk22applicationv2.model.triviadata.TriviaData;
-import com.example.triviaapprk22applicationv2.model.triviadata.MultipleChoiceQuestion;
+import com.example.triviaapprk22applicationv2.model.triviadata.Question;
 import com.example.triviaapprk22applicationv2.repository.TriviaAppRepository;
 import org.springframework.stereotype.Service;
 
@@ -14,7 +14,7 @@ public class TriviaAppService {
         this.repository = repository;
     }
 
-    public MultipleChoiceQuestion[] getQuestions(String uri) {
+    public Question[] getQuestions(String uri) {
         TriviaData triviaData = repository.fetch(uri);
         if (triviaData == null) {
             throw new ResourceUnavailableException("Resource 'TriviaData' not found at:\t" + uri);

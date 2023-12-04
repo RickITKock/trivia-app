@@ -3,7 +3,7 @@ package com.example.triviaapprk22applicationv2.service;
 import com.example.triviaapprk22applicationv2.repository.TriviaAppRepository;
 import com.example.triviaapprk22applicationv2.exceptions.ResourceUnavailableException;
 import com.example.triviaapprk22applicationv2.model.triviadata.TriviaData;
-import com.example.triviaapprk22applicationv2.model.triviadata.MultipleChoiceQuestion;
+import com.example.triviaapprk22applicationv2.model.triviadata.Question;
 import com.example.triviaapprk22applicationv2.stubs.Stubs;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -22,8 +22,8 @@ class TriviaAppServiceTest {
 
     @BeforeEach
     void setup() {
-        MultipleChoiceQuestion[] dummyMultipleChoiceQuestions = Stubs.createDummyMultipleChoiceQuestions(AMOUNT_OF_QUESTIONS, NUMBER_OF_INCORRECT_ANSWERS_FOR_EACH_QUESTION);
-        this.dummyTriviaData = Stubs.createDummyTriviaDataObject(dummyMultipleChoiceQuestions);
+        Question[] dummyQuestions = Stubs.createDummyMultipleChoiceQuestions(AMOUNT_OF_QUESTIONS, NUMBER_OF_INCORRECT_ANSWERS_FOR_EACH_QUESTION);
+        this.dummyTriviaData = Stubs.createDummyTriviaDataObject(dummyQuestions);
         this.repository = Mockito.mock(TriviaAppRepository.class);
         this.serviceUnderTest = new TriviaAppService(repository);
     }
@@ -33,7 +33,7 @@ class TriviaAppServiceTest {
         // Arrange
         when(repository.fetch(DUMMY_URI)).thenReturn(dummyTriviaData);
         // Act
-        MultipleChoiceQuestion[] questions = serviceUnderTest.getQuestions(DUMMY_URI);
+        Question[] questions = serviceUnderTest.getQuestions(DUMMY_URI);
         // Assert
         assertEquals(questions.length, AMOUNT_OF_QUESTIONS);
     }
@@ -54,11 +54,11 @@ class TriviaAppServiceTest {
     void canGetEmptyListOfQuestions() {
         // Arrange
         int expected = 0;
-        dummyTriviaData.setMultipleChoiceQuestions(new MultipleChoiceQuestion[0]);
+        dummyTriviaData.setMultipleChoiceQuestions(new Question[0]);
         when(repository.fetch(DUMMY_URI)).thenReturn(dummyTriviaData);
         // Act
-        MultipleChoiceQuestion[] multipleChoiceQuestions = serviceUnderTest.getQuestions(DUMMY_URI);
+        Question[] questions = serviceUnderTest.getQuestions(DUMMY_URI);
         // Assert
-        assertEquals(expected, multipleChoiceQuestions.length);
+        assertEquals(expected, questions.length);
     }
 }

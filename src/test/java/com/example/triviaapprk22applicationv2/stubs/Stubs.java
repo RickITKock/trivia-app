@@ -1,34 +1,34 @@
 package com.example.triviaapprk22applicationv2.stubs;
 
 import com.example.triviaapprk22applicationv2.model.triviadata.TriviaData;
-import com.example.triviaapprk22applicationv2.model.triviadata.MultipleChoiceQuestion;
+import com.example.triviaapprk22applicationv2.model.triviadata.Question;
 
 public class Stubs {
-    public static TriviaData createDummyTriviaDataObject(MultipleChoiceQuestion[] multipleChoiceQuestionsArray) {
+    public static TriviaData createDummyTriviaDataObject(Question[] questionsArray) {
         TriviaData dummyTriviaDataObject = new TriviaData();
-        dummyTriviaDataObject.setMultipleChoiceQuestions(multipleChoiceQuestionsArray);
+        dummyTriviaDataObject.setMultipleChoiceQuestions(questionsArray);
         return dummyTriviaDataObject;
     }
 
-    public static MultipleChoiceQuestion createDummyMultipleChoiceQuestion(int id, int numberOfIncorrectAnswers) {
+    public static Question createDummyMultipleChoiceQuestion(int id, int numberOfIncorrectAnswers) {
         String [] incorrectAnswers = new String[numberOfIncorrectAnswers];
         for (int i = 1 ; i < incorrectAnswers.length + 1 ; i++) {
             incorrectAnswers[i - 1] = "Incorrect answer " + i;
         }
-        MultipleChoiceQuestion dummyMultipleChoiceQuestion = new MultipleChoiceQuestion();
-        dummyMultipleChoiceQuestion.setQuestion("Question " + id);
-        dummyMultipleChoiceQuestion.setCategory("Category " + id);
-        dummyMultipleChoiceQuestion.setCorrectAnswer("Correct Answer " + id);
-        dummyMultipleChoiceQuestion.setIncorrectAnswers(incorrectAnswers);
-        dummyMultipleChoiceQuestion.setDifficulty("Difficulty " + id);
-        return dummyMultipleChoiceQuestion;
+        Question dummyQuestion = new Question();
+         dummyQuestion.setQuestion("Question " + id);
+        dummyQuestion.setCategory("Category " + id);
+        dummyQuestion.setCorrectAnswer("Correct Answer " + id);
+        dummyQuestion.setIncorrectAnswers(incorrectAnswers);
+        dummyQuestion.setDifficulty("Difficulty " + id);
+        return dummyQuestion;
     }
 
-    public static MultipleChoiceQuestion[] createDummyMultipleChoiceQuestions(int amount, int numberOfIncorrectAnswersForEach) {
-        MultipleChoiceQuestion[] dummyMultipleChoiceQuestions = new MultipleChoiceQuestion[3];
-        for (int i = 1; i < dummyMultipleChoiceQuestions.length + 1 ; i++) {
-            dummyMultipleChoiceQuestions[i - 1] = Stubs.createDummyMultipleChoiceQuestion(i, 4);
+    public static Question[] createDummyMultipleChoiceQuestions(int amount, int numberOfIncorrectAnswersForEach) {
+        Question[] dummyQuestions = new Question[3];
+        for (int i = 1; i < dummyQuestions.length + 1 ; i++) {
+            dummyQuestions[i - 1] = Stubs.createDummyMultipleChoiceQuestion(i, 4);
         }
-        return dummyMultipleChoiceQuestions;
+        return dummyQuestions;
     }
 }

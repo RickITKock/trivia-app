@@ -1,16 +1,12 @@
 package com.example.triviaapprk22applicationv2.model.triviadata;
 
-public class Answer extends QuizItem {
+public class Answer {
     private String submittedAnswer = "";
     private final String correctAnswer;
     private boolean isCorrect = false;
 
-    public Answer(String questionText, String correctAnswer) {
-        super(questionText);
+    public Answer(String correctAnswer, String submittedAnswer) {
         this.correctAnswer = correctAnswer;
-    }
-
-    public void setSubmittedAnswer(String submittedAnswer) {
         this.submittedAnswer = submittedAnswer != null ? submittedAnswer.trim() : "";
         checkAndSetIsCorrect();
     }
@@ -34,8 +30,7 @@ public class Answer extends QuizItem {
     @Override
     public String toString() {
         return "Answer{" +
-                "questionText='" + getQuestionText() + '\'' +
-                ", submittedAnswer='" + submittedAnswer + '\'' +
+                "submittedAnswer='" + submittedAnswer + '\'' +
                 ", correctAnswer='" + correctAnswer + '\'' +
                 ", isCorrect=" + isCorrect +
                 '}';

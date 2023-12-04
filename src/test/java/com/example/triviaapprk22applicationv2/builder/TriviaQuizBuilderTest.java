@@ -1,6 +1,6 @@
 package com.example.triviaapprk22applicationv2.builder;
 
-import com.example.triviaapprk22applicationv2.model.triviadata.MultipleChoiceQuestion;
+import com.example.triviaapprk22applicationv2.model.triviadata.Question;
 import com.example.triviaapprk22applicationv2.model.triviadata.PreparedMultipleChoiceQuestion;
 import com.example.triviaapprk22applicationv2.stubs.Stubs;
 import org.junit.jupiter.api.BeforeEach;
@@ -12,22 +12,22 @@ import static org.junit.jupiter.api.Assertions.*;
 class TriviaQuizBuilderTest {
     private static final int AMOUNT_OF_QUESTIONS = 3;
     private static final int NUMBER_OF_INCORRECT_ANSWERS_FOR_EACH_QUESTION = 4;
-    private MultipleChoiceQuestion[] dummyMultipleChoiceQuestions;
+    private Question[] dummyQuestions;
     private TriviaQuizBuilder builderUnderTest;
 
     @BeforeEach
     void setup() {
-        this.dummyMultipleChoiceQuestions = Stubs
+        this.dummyQuestions = Stubs
                 .createDummyMultipleChoiceQuestions(AMOUNT_OF_QUESTIONS, NUMBER_OF_INCORRECT_ANSWERS_FOR_EACH_QUESTION);
-        this.builderUnderTest = new TriviaQuizBuilder(this.dummyMultipleChoiceQuestions);
+        this.builderUnderTest = new TriviaQuizBuilder(this.dummyQuestions);
     }
 
     @Test
     void canPrepareASingleMultipleChoiceQuestion() {
         // Arrange
-        MultipleChoiceQuestion dummyMultipleChoiceQuestion = dummyMultipleChoiceQuestions[0];
+        Question dummyQuestion = dummyQuestions[0];
         // Act
-        PreparedMultipleChoiceQuestion preparedMultipleChoiceQuestion = builderUnderTest.getPreparedMultipleChoiceQuestion(dummyMultipleChoiceQuestion);
+        PreparedMultipleChoiceQuestion preparedMultipleChoiceQuestion = builderUnderTest.getPreparedMultipleChoiceQuestion(dummyQuestion);
         // Assert
         assertNotNull(preparedMultipleChoiceQuestion);
     }
@@ -38,7 +38,7 @@ class TriviaQuizBuilderTest {
         // Act
         PreparedMultipleChoiceQuestion[] preparedMultipleChoiceQuestions = builderUnderTest.getPreparedMultipleChoiceQuestions();
         // Assert
-        assertEquals(preparedMultipleChoiceQuestions.length, dummyMultipleChoiceQuestions.length);
+        assertEquals(preparedMultipleChoiceQuestions.length, dummyQuestions.length);
     }
 
     @Test
@@ -46,7 +46,7 @@ class TriviaQuizBuilderTest {
         // Arrange
         int numberOfAnswersExpected = NUMBER_OF_INCORRECT_ANSWERS_FOR_EACH_QUESTION + 1;
         PreparedMultipleChoiceQuestion preparedMultipleChoiceQuestion = builderUnderTest
-                .getPreparedMultipleChoiceQuestion(dummyMultipleChoiceQuestions[0]);
+                .getPreparedMultipleChoiceQuestion(dummyQuestions[0]);
         // Act
         String[] allPossibleAnswers = preparedMultipleChoiceQuestion.getAllPossibleAnswers();
         // Assert
@@ -56,7 +56,7 @@ class TriviaQuizBuilderTest {
     @Test
     void allPossibleAnswersShouldContainIncorrectAnswersAndCorrectAnswer() {
         // Arrange
-        MultipleChoiceQuestion dqStub = dummyMultipleChoiceQuestions[0];
+        Question dqStub = dummyQuestions[0];
         PreparedMultipleChoiceQuestion preparedMultipleChoiceQuestion = builderUnderTest
                 .getPreparedMultipleChoiceQuestion(dqStub);
         String[] incorrectAnswersAndCorrectAnswer = copyOf(dqStub.getIncorrectAnswers(), dqStub.getIncorrectAnswers().length + 1);
@@ -73,7 +73,7 @@ class TriviaQuizBuilderTest {
     @Test
     void allPossibleAnswersAreShuffled() {
         // Arrange
-        MultipleChoiceQuestion dqStub = dummyMultipleChoiceQuestions[0];
+        Question dqStub = dummyQuestions[0];
         PreparedMultipleChoiceQuestion preparedMultipleChoiceQuestion = builderUnderTest
                 .getPreparedMultipleChoiceQuestion(dqStub);
         String[] incorrectAnswersAndCorrectAnswer = copyOf(dqStub.getIncorrectAnswers(), dqStub.getIncorrectAnswers().length + 1);

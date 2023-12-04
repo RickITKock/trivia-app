@@ -2,7 +2,7 @@ package com.example.triviaapprk22applicationv2.controller;
 
 import com.example.triviaapprk22applicationv2.builder.TriviaQuizBuilder;
 import com.example.triviaapprk22applicationv2.model.triviadata.Answer;
-import com.example.triviaapprk22applicationv2.model.triviadata.MultipleChoiceQuestion;
+import com.example.triviaapprk22applicationv2.model.triviadata.Question;
 import com.example.triviaapprk22applicationv2.model.triviadata.PreparedMultipleChoiceQuestion;
 import com.example.triviaapprk22applicationv2.repository.TriviaAppRepository;
 import com.example.triviaapprk22applicationv2.service.TriviaAppService;
@@ -31,7 +31,7 @@ public class TriviaAppController {
     private RestTemplate restTemplate;
     private TriviaAppRepository repository;
     private TriviaAppService service;
-    private MultipleChoiceQuestion[] multipleChoiceQuestions;
+    private Question[] questions;
     private TriviaQuizBuilder builder;
 
     TriviaAppController() {
@@ -39,8 +39,8 @@ public class TriviaAppController {
         this.repository = new TriviaAppRepository(restTemplate);
         this.service = new TriviaAppService(repository);
         String uri = constructFullPathToApi(OPENTDB_BASE_URI, "amount", String.valueOf(NUMBER_OF_QUESTIONS));
-        this.multipleChoiceQuestions = this.service.getQuestions(uri);
-        this.builder = new TriviaQuizBuilder(this.multipleChoiceQuestions);
+        this.questions = this.service.getQuestions(uri);
+        this.builder = new TriviaQuizBuilder(this.questions);
         for (PreparedMultipleChoiceQuestion question : builder.getPreparedMultipleChoiceQuestions()) {
             System.out.println(question.toString());
         }
@@ -58,8 +58,8 @@ public class TriviaAppController {
         List<Answer> answers = new ArrayList<>();
 
         for (PreparedMultipleChoiceQuestion question : questions) {
-            Answer answer = new Answer(question.getQuestion(), question.getCorrectAnswer());
-            answer.setSubmittedAnswer(allParams.get("answer" + question.getId()));
+            String submittedAnswer = allParams.get("answer" + question.getId());
+            Answer answer = new Answer(question.getCorrectAnswer(), submittedAnswer);
             answers.add(answer);
             System.out.println(answer.toString());
         }

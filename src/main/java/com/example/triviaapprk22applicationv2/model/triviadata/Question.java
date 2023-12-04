@@ -5,9 +5,8 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 import java.util.Arrays;
 
-// TODO: Remove submitted answer and add it to a form instead
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class MultipleChoiceQuestion {
+public class Question {
     private String category;
     private String type;
     private String difficulty;
@@ -16,9 +15,9 @@ public class MultipleChoiceQuestion {
     private String[] incorrectAnswers;
     @JsonProperty("correct_answer")
     private String correctAnswer;
-    private String submittedAnswer;
 
-    public MultipleChoiceQuestion() {}
+    public Question() {
+    }
 
     public String getCategory() {
         return category;
@@ -68,14 +67,6 @@ public class MultipleChoiceQuestion {
         this.correctAnswer = correctAnswer;
     }
 
-    public String getSubmittedAnswer() {
-        return submittedAnswer;
-    }
-
-    public void setSubmittedAnswer(String submittedAnswer) {
-        this.submittedAnswer = submittedAnswer;
-    }
-
     @Override
     public String toString() {
         return "MultipleChoiceQuestion{" +
@@ -85,7 +76,6 @@ public class MultipleChoiceQuestion {
                 ", question='" + question + '\'' +
                 ", incorrectAnswers=" + Arrays.toString(incorrectAnswers) +
                 ", correctAnswer='" + correctAnswer + '\'' +
-                ", submittedAnswer='" + submittedAnswer + '\'' +
                 '}';
     }
 }

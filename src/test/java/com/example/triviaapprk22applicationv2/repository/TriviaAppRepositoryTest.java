@@ -1,7 +1,7 @@
 package com.example.triviaapprk22applicationv2.repository;
 
 import com.example.triviaapprk22applicationv2.model.triviadata.TriviaData;
-import com.example.triviaapprk22applicationv2.model.triviadata.MultipleChoiceQuestion;
+import com.example.triviaapprk22applicationv2.model.triviadata.Question;
 import com.example.triviaapprk22applicationv2.stubs.Stubs;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -21,11 +21,11 @@ class TriviaAppRepositoryTest {
 
     @BeforeEach
     void setup() {
-        MultipleChoiceQuestion[] dummyMultipleChoiceQuestions = Stubs.createDummyMultipleChoiceQuestions(
+        Question[] dummyQuestions = Stubs.createDummyMultipleChoiceQuestions(
                 AMOUNT_OF_QUESTIONS,
                 NUMBER_OF_INCORRECT_ANSWERS_FOR_EACH_QUESTION
         );
-        this.dummyTriviaData = Stubs.createDummyTriviaDataObject(dummyMultipleChoiceQuestions);
+        this.dummyTriviaData = Stubs.createDummyTriviaDataObject(dummyQuestions);
         this.template = Mockito.mock(RestTemplate.class);
         this.repositoryUnderTest = new TriviaAppRepository(template);
     }

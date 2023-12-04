@@ -8,20 +8,20 @@ import java.util.Arrays;
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class TriviaData {
     @JsonProperty("results")
-    private MultipleChoiceQuestion[] multipleChoiceQuestions;
+    private Question[] questions;
 
-    public MultipleChoiceQuestion[] getMultipleChoiceQuestions() {
-        return multipleChoiceQuestions;
+    public Question[] getMultipleChoiceQuestions() {
+        return questions;
     }
 
-    public void setMultipleChoiceQuestions(MultipleChoiceQuestion[] multipleChoiceQuestions) {
-        this.multipleChoiceQuestions = multipleChoiceQuestions;
+    public void setMultipleChoiceQuestions(Question[] questions) {
+        this.questions = questions;
     }
 
     @Override
     public String toString() {
         return "TriviaData{" +
-                "multipleChoiceQuestions=" + Arrays.toString(multipleChoiceQuestions) +
+                "multipleChoiceQuestions=" + Arrays.toString(questions) +
                 '}';
     }
 }
