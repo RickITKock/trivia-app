@@ -1,7 +1,6 @@
 package com.example.triviaapprk22applicationv2.builder;
 
 import com.example.triviaapprk22applicationv2.model.Question;
-import com.example.triviaapprk22applicationv2.model.PreparedMultipleChoiceQuestion;
 import com.example.triviaapprk22applicationv2.stubs.Stubs;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

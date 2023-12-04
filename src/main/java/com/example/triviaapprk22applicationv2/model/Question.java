@@ -8,7 +8,7 @@ import java.util.concurrent.ThreadLocalRandom;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class Question {
-    private int id;
+    private static int id;
 
     private String category;
     private String type;

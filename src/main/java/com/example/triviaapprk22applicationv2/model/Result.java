@@ -1,10 +1,10 @@
 package com.example.triviaapprk22applicationv2.model;
 
 public class Result {
-    private PreparedMultipleChoiceQuestion question;
+    private Question question;
     private Answer answer;
 
-    public Result(PreparedMultipleChoiceQuestion question, Answer answer) {
+    public Result(Question question, Answer answer) {
         this.question = question;
         this.answer = answer;
     }

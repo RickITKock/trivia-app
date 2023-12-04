@@ -1,9 +1,7 @@
 package com.example.triviaapprk22applicationv2.controller;
 
-import com.example.triviaapprk22applicationv2.builder.TriviaQuizBuilder;
 import com.example.triviaapprk22applicationv2.model.Answer;
 import com.example.triviaapprk22applicationv2.model.Question;
-import com.example.triviaapprk22applicationv2.model.PreparedMultipleChoiceQuestion;
 import com.example.triviaapprk22applicationv2.model.Result;
 import com.example.triviaapprk22applicationv2.repository.TriviaAppRepository;
 import com.example.triviaapprk22applicationv2.service.TriviaAppService;
@@ -19,7 +17,6 @@ import java.util.List;
 import java.util.Map;
 
 // TODO: Create a list of questions and answers when fetching API data
-// TODO: Delete TriviaQuizBuilder
 // TODO: Make sure all tests succeed
 // TODO: Refactor code
 // TODO: Style the templates
@@ -32,7 +29,6 @@ public class TriviaAppController {
     private TriviaAppRepository repository;
     private TriviaAppService service;
     private Question[] questions;
-    private TriviaQuizBuilder builder;
 
     TriviaAppController() {
         this.restTemplate = new RestTemplate();
@@ -41,10 +37,11 @@ public class TriviaAppController {
         String uri = constructFullPathToApi(OPENTDB_BASE_URI, "amount", String.valueOf(NUMBER_OF_QUESTIONS));
         this.questions = this.service.getQuestions(uri);
 
-        for (Question question : questions) {
+        for (int i = 0 ; i < questions.length; i++) {
+            Question question = questions[i];
             question.prepareAllPossibleAnswers();
+            question.setId(i);
         }
-        this.builder = new TriviaQuizBuilder(this.questions);
     }
 
     @GetMapping(value = "/questions")
@@ -55,11 +52,11 @@ public class TriviaAppController {
 
     @PostMapping(value = "/results")
     public String showAnswers(@RequestParam Map<String, String> allParams, Model model) {
-        PreparedMultipleChoiceQuestion[] questions = builder.getPreparedMultipleChoiceQuestions();
         List<Result> results = new ArrayList<>();
 
-        for (PreparedMultipleChoiceQuestion question : questions) {
+        for (Question question : questions) {
             String submittedAnswer = allParams.get("answer" + question.getId());
+            System.out.println(question.getId());
             Answer answer = new Answer(question.getCorrectAnswer(), submittedAnswer);
             Result result = new Result(question, answer);
             results.add(result);
