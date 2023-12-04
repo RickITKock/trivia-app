@@ -30,4 +30,15 @@ public class Answer extends QuizItem {
     public boolean isCorrect() {
         return isCorrect;
     }
+
+    @Override
+    public String toString() {
+        return "Answer{" +
+                "questionText='" + getQuestionText() + '\'' +
+                ", submittedAnswer='" + submittedAnswer + '\'' +
+                ", correctAnswer='" + correctAnswer + '\'' +
+                ", isCorrect=" + isCorrect +
+                '}';
+    }
+
 }

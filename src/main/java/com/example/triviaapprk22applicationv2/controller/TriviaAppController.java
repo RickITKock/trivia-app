@@ -1,6 +1,7 @@
 package com.example.triviaapprk22applicationv2.controller;
 
 import com.example.triviaapprk22applicationv2.builder.TriviaQuizBuilder;
+import com.example.triviaapprk22applicationv2.model.triviadata.Answer;
 import com.example.triviaapprk22applicationv2.model.triviadata.MultipleChoiceQuestion;
 import com.example.triviaapprk22applicationv2.model.triviadata.PreparedMultipleChoiceQuestion;
 import com.example.triviaapprk22applicationv2.repository.TriviaAppRepository;
@@ -12,6 +13,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.client.RestTemplate;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
 @Controller
@@ -45,30 +48,14 @@ public class TriviaAppController {
     @PostMapping(value = "/answers")
     public String showAnswers(@RequestParam Map<String, String> allParams, Model model) {
         PreparedMultipleChoiceQuestion[] questions = builder.getPreparedMultipleChoiceQuestions();
-
-        // Go through each question and check which have been correctly answered
-
-        // Create an object that hold the information we need to represent in view
-        // The object contains:
-        // - a list of questions with the question,
-        // - the correct answer,
-        // - the submitted answer
-        // - and a boolean to indicate if the submitted answer is correct or not
+        List<Answer> answers = new ArrayList<>();
 
         for (PreparedMultipleChoiceQuestion question : questions) {
-            String correctAnswer = question.getCorrectAnswer();
-            // Assuming allParams is a Map<String, String>
-            String submittedAnswer = allParams.get("answer" + question.getId()); // Assuming each question has an ID
-            submittedAnswer = submittedAnswer != null ? submittedAnswer.trim() : "";
-
-            System.out.println("Correct answer:\t" + correctAnswer);
-            System.out.println("Submitted answer:\t" + submittedAnswer);
-
-            // Compare the correct answer to the submitted answer
-            boolean isCorrect = correctAnswer.trim().equalsIgnoreCase(submittedAnswer);
-            System.out.println("Answer is " + (isCorrect ? "correct" : "incorrect"));
+            Answer answer = new Answer(question.getQuestion(), question.getCorrectAnswer());
+            answer.setSubmittedAnswer(allParams.get("answer" + question.getId()));
+            answers.add(answer);
+            System.out.println(answer.toString());
         }
-
 
         return "answers";
     }
