@@ -17,6 +17,13 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+// TODO: Create a question class that extends QuizItem
+// TODO: Create a list of questions and answers when fetching API data
+// TODO: Delete TriviaQuizBuilder
+// TODO: Make sure all tests succeed
+// TODO: Refactor code
+// TODO: Style the templates
+
 @Controller
 public class TriviaAppController {
     private static final String OPENTDB_BASE_URI = "https://opentdb.com/api.php";
