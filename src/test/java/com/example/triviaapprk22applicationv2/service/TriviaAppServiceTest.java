@@ -2,8 +2,8 @@ package com.example.triviaapprk22applicationv2.service;
 
 import com.example.triviaapprk22applicationv2.repository.TriviaAppRepository;
 import com.example.triviaapprk22applicationv2.exceptions.ResourceUnavailableException;
-import com.example.triviaapprk22applicationv2.model.triviadata.TriviaData;
-import com.example.triviaapprk22applicationv2.model.triviadata.Question;
+import com.example.triviaapprk22applicationv2.model.TriviaData;
+import com.example.triviaapprk22applicationv2.model.Question;
 import com.example.triviaapprk22applicationv2.stubs.Stubs;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

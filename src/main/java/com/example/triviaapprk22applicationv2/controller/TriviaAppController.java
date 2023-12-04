@@ -1,9 +1,10 @@
 package com.example.triviaapprk22applicationv2.controller;
 
 import com.example.triviaapprk22applicationv2.builder.TriviaQuizBuilder;
-import com.example.triviaapprk22applicationv2.model.triviadata.Answer;
-import com.example.triviaapprk22applicationv2.model.triviadata.Question;
-import com.example.triviaapprk22applicationv2.model.triviadata.PreparedMultipleChoiceQuestion;
+import com.example.triviaapprk22applicationv2.model.Answer;
+import com.example.triviaapprk22applicationv2.model.Question;
+import com.example.triviaapprk22applicationv2.model.PreparedMultipleChoiceQuestion;
+import com.example.triviaapprk22applicationv2.model.Result;
 import com.example.triviaapprk22applicationv2.repository.TriviaAppRepository;
 import com.example.triviaapprk22applicationv2.service.TriviaAppService;
 import org.springframework.stereotype.Controller;
@@ -17,7 +18,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-// TODO: Create a question class that extends QuizItem
 // TODO: Create a list of questions and answers when fetching API data
 // TODO: Delete TriviaQuizBuilder
 // TODO: Make sure all tests succeed
@@ -40,33 +40,32 @@ public class TriviaAppController {
         this.service = new TriviaAppService(repository);
         String uri = constructFullPathToApi(OPENTDB_BASE_URI, "amount", String.valueOf(NUMBER_OF_QUESTIONS));
         this.questions = this.service.getQuestions(uri);
-        this.builder = new TriviaQuizBuilder(this.questions);
-        for (PreparedMultipleChoiceQuestion question : builder.getPreparedMultipleChoiceQuestions()) {
-            System.out.println(question.toString());
+
+        for (Question question : questions) {
+            question.prepareAllPossibleAnswers();
         }
+        this.builder = new TriviaQuizBuilder(this.questions);
     }
 
     @GetMapping(value = "/questions")
     public String showTriviaApp(Model model) {
-        model.addAttribute("questions", this.builder);
+        model.addAttribute("questions", this.questions);
         return "questions";
     }
 
-    @PostMapping(value = "/answers")
+    @PostMapping(value = "/results")
     public String showAnswers(@RequestParam Map<String, String> allParams, Model model) {
         PreparedMultipleChoiceQuestion[] questions = builder.getPreparedMultipleChoiceQuestions();
-        List<Answer> answers = new ArrayList<>();
+        List<Result> results = new ArrayList<>();
 
         for (PreparedMultipleChoiceQuestion question : questions) {
             String submittedAnswer = allParams.get("answer" + question.getId());
             Answer answer = new Answer(question.getCorrectAnswer(), submittedAnswer);
-            answers.add(answer);
-            System.out.println(answer.toString());
+            Result result = new Result(question, answer);
+            results.add(result);
         }
-
-        model.addAttribute("answers", answers);
-
-        return "answers";
+        model.addAttribute("results", results);
+        return "results";
     }
 
     private String constructFullPathToApi(String uri, String parameterName, String value) {

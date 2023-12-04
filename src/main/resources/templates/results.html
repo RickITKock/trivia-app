@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Trivia Answers</title>
+    <!-- Add any CSS links here -->
+</head>
+<body>
+<h1>Trivia Game Answers</h1>
+<div>
+    <ul>
+        <li th:each="result : ${results}">
+            <p><strong>Question:</strong> <span th:text="${result.getQuestion()}"></span></p>
+            <p><strong>Your Answer:</strong> <span th:text="${result.getSubmittedAnswer()}"></span></p>
+            <p><strong>Correct Answer:</strong> <span th:text="${result.getCorrectAnswer()}"></span></p>
+            <p th:class="${result.isCorrect() ? 'correct' : 'incorrect'}">
+                <span th:text="${result.isCorrect() ? 'Correct' : 'Incorrect'}"></span>
+            </p>
+        </li>
+    </ul>
+</div>
+</body>
+</html>

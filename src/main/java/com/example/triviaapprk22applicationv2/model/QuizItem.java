@@ -1,4 +1,4 @@
-package com.example.triviaapprk22applicationv2.model.triviadata;
+package com.example.triviaapprk22applicationv2.model;
 
 public class QuizItem {
     private String questionText;

@@ -1,12 +1,15 @@
-package com.example.triviaapprk22applicationv2.model.triviadata;
+package com.example.triviaapprk22applicationv2.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-import java.util.Arrays;
+import java.util.*;
+import java.util.concurrent.ThreadLocalRandom;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class Question {
+    private int id;
+
     private String category;
     private String type;
     private String difficulty;
@@ -15,6 +18,8 @@ public class Question {
     private String[] incorrectAnswers;
     @JsonProperty("correct_answer")
     private String correctAnswer;
+
+    private ArrayList<String> allPossibleAnswers;
 
     public Question() {
     }
@@ -65,6 +70,25 @@ public class Question {
 
     public void setCorrectAnswer(String correctAnswer) {
         this.correctAnswer = correctAnswer;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public ArrayList<String> getAllPossibleAnswers() {
+        return allPossibleAnswers;
+    }
+
+    public void prepareAllPossibleAnswers() {
+        ArrayList<String> shuffledAnswers = new ArrayList<>(Arrays.asList(incorrectAnswers));
+        shuffledAnswers.add(correctAnswer);
+        Collections.shuffle(shuffledAnswers, new Random());
+        this.allPossibleAnswers = shuffledAnswers;
     }
 
     @Override

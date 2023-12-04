@@ -1,7 +1,7 @@
 package com.example.triviaapprk22applicationv2.stubs;
 
-import com.example.triviaapprk22applicationv2.model.triviadata.TriviaData;
-import com.example.triviaapprk22applicationv2.model.triviadata.Question;
+import com.example.triviaapprk22applicationv2.model.TriviaData;
+import com.example.triviaapprk22applicationv2.model.Question;
 
 public class Stubs {
     public static TriviaData createDummyTriviaDataObject(Question[] questionsArray) {

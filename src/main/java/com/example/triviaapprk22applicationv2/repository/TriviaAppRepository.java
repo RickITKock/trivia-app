@@ -1,6 +1,6 @@
 package com.example.triviaapprk22applicationv2.repository;
 
-import com.example.triviaapprk22applicationv2.model.triviadata.TriviaData;
+import com.example.triviaapprk22applicationv2.model.TriviaData;
 import org.springframework.stereotype.Repository;
 import org.springframework.web.client.RestTemplate;
 

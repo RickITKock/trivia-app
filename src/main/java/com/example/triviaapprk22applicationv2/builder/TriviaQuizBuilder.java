@@ -1,7 +1,7 @@
 package com.example.triviaapprk22applicationv2.builder;
 
-import com.example.triviaapprk22applicationv2.model.triviadata.Question;
-import com.example.triviaapprk22applicationv2.model.triviadata.PreparedMultipleChoiceQuestion;
+import com.example.triviaapprk22applicationv2.model.Question;
+import com.example.triviaapprk22applicationv2.model.PreparedMultipleChoiceQuestion;
 
 import java.util.Random;
 import java.util.concurrent.ThreadLocalRandom;

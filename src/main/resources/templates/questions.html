@@ -13,8 +13,8 @@
 <div th:class="container">
     <div th:if="${questions}">
         <p>Questions are available</p>
-        <form action="#" th:action="@{/answers}" th:object="${questions}" method="post">
-            <div th:each="question, iterStat : ${questions.getPreparedMultipleChoiceQuestions()}">
+        <form action="#" th:action="@{/results}" th:object="${questions}" method="post">
+            <div th:each="question, iterStat : ${questions}">
                 <p th:text="${question.question}">Question text here</p>
                 <ol>
                     <li th:each="answer : ${question.allPossibleAnswers}">
