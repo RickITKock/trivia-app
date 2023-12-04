@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Trivia Questions</title>
+<!--    <link href="../static/style.css" rel="stylesheet"/>-->
     <style>
         ul {
             list-style-type: none;
@@ -18,7 +19,7 @@
                 <p th:text="${question.question}">Question text here</p>
                 <ol>
                     <li th:each="answer : ${question.allPossibleAnswers}">
-                        <input type="radio" th:name="|answer${iterStat.index}|" th:value="${answer}" />
+                        <input type="radio" th:name="|answer${question.getId()}|" th:value="${answer}" />
                         <span th:text="${answer}">Answer text</span>
                     </li>
                 </ol>

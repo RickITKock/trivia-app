@@ -75,10 +75,6 @@ public class Question {
         return id;
     }
 
-//    public void setId(int id) {
-//        this.id = id;
-//    }
-
     public ArrayList<String> getAllPossibleAnswers() {
         return allPossibleAnswers;
     }
@@ -92,12 +88,14 @@ public class Question {
 
     @Override
     public String toString() {
-        return "MultipleChoiceQuestion{" +
+        return "Question{" +
+                "id='" + id + '\'' +
                 ", category='" + category + '\'' +
                 ", type='" + type + '\'' +
                 ", difficulty='" + difficulty + '\'' +
                 ", question='" + question + '\'' +
                 ", incorrectAnswers=" + Arrays.toString(incorrectAnswers) +
+                ", allPossibleAnswers=" + allPossibleAnswers.toString() +
                 ", correctAnswer='" + correctAnswer + '\'' +
                 '}';
     }

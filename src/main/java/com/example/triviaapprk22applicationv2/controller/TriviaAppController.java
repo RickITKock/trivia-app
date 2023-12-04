@@ -16,11 +16,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-// TODO: Create a list of questions and answers when fetching API data
-// TODO: Make sure all tests succeed
-// TODO: Refactor code
-// TODO: Style the templates
-
 @Controller
 public class TriviaAppController {
     private static final String OPENTDB_BASE_URI = "https://opentdb.com/api.php";
@@ -36,6 +31,11 @@ public class TriviaAppController {
         this.service = new TriviaAppService(repository);
         String uri = constructFullPathToApi(OPENTDB_BASE_URI, "amount", String.valueOf(NUMBER_OF_QUESTIONS));
         this.questions = this.service.getQuestions(uri);
+
+        for (Question question: questions) {
+            question.prepareAllPossibleAnswers();
+            System.out.println(question.toString());
+        }
     }
 
     @GetMapping(value = "/questions")
