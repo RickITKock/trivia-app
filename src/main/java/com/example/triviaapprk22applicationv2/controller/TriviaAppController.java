@@ -56,7 +56,6 @@ public class TriviaAppController {
 
         for (Question question : questions) {
             String submittedAnswer = allParams.get("answer" + question.getId());
-            System.out.println(question.getId());
             Answer answer = new Answer(question.getCorrectAnswer(), submittedAnswer);
             Result result = new Result(question, answer);
             results.add(result);
