@@ -2,6 +2,7 @@ package com.example.triviaapprk22applicationv2.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import org.springframework.web.util.HtmlUtils;
 
 import java.util.*;
 import java.util.concurrent.ThreadLocalRandom;
@@ -52,7 +53,10 @@ public class Question {
     }
 
     public void setIncorrectAnswers(String[] incorrectAnswers) {
-        this.incorrectAnswers = incorrectAnswers;
+        this.incorrectAnswers = new String[incorrectAnswers.length];
+        for (int i = 0 ; i < incorrectAnswers.length ; i++) {
+            this.incorrectAnswers[i] = HtmlUtils.htmlUnescape(incorrectAnswers[i]);
+        }
     }
 
     public String getQuestion() {
@@ -60,7 +64,7 @@ public class Question {
     }
 
     public void setQuestion(String question) {
-        this.question = question;
+        this.question = HtmlUtils.htmlUnescape(question);
     }
 
     public String getCorrectAnswer() {
@@ -68,7 +72,7 @@ public class Question {
     }
 
     public void setCorrectAnswer(String correctAnswer) {
-        this.correctAnswer = correctAnswer;
+        this.correctAnswer = HtmlUtils.htmlUnescape(correctAnswer);
     }
 
     public UUID getId() {

@@ -2,22 +2,28 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Trivia Answers</title>
-    <!-- Add any CSS links here -->
+    <title>Trivia Game Answers</title>
+    <link th:href="@{/css/style.css}" rel="stylesheet" type="text/css"/>
 </head>
 <body>
 <h1>Trivia Game Answers</h1>
 <div>
-    <ul>
-        <li th:each="result : ${results}">
+    <div th:class="container">
+        <div th:each="result : ${results}" th:class="card">
             <p><strong>Question:</strong> <span th:text="${result.getQuestion()}"></span></p>
             <p><strong>Your Answer:</strong> <span th:text="${result.getSubmittedAnswer()}"></span></p>
             <p><strong>Correct Answer:</strong> <span th:text="${result.getCorrectAnswer()}"></span></p>
-            <p th:class="${result.isCorrect() ? 'correct' : 'incorrect'}">
-                <span th:text="${result.isCorrect() ? 'Correct' : 'Incorrect'}"></span>
-            </p>
-        </li>
-    </ul>
+            <div th:switch="${result.isCorrect()}">
+                <div th:case="true" th:class="correct">
+                    <img th:src="@{/images/check-circle.svg}" />
+                </div>
+                <div th:case="false" th:class="incorrect">
+                    <img th:src="@{/images/cancel-circle.svg}" />
+                </div>
+            </div>
+        </div>
+        <a class="btn mt-4" href="/questions">Back</a>
+    </div>
 </div>
 </body>
 </html>

@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.client.RestTemplate;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -29,6 +28,10 @@ public class TriviaAppController {
         this.restTemplate = new RestTemplate();
         this.repository = new TriviaAppRepository(restTemplate);
         this.service = new TriviaAppService(repository);
+    }
+
+    @GetMapping(value = "/questions")
+    public String showTriviaApp(Model model) {
         String uri = constructFullPathToApi(OPENTDB_BASE_URI, "amount", String.valueOf(NUMBER_OF_QUESTIONS));
         this.questions = this.service.getQuestions(uri);
 
@@ -36,10 +39,6 @@ public class TriviaAppController {
             question.prepareAllPossibleAnswers();
             System.out.println(question.toString());
         }
-    }
-
-    @GetMapping(value = "/questions")
-    public String showTriviaApp(Model model) {
         model.addAttribute("questions", this.questions);
         return "questions";
     }
