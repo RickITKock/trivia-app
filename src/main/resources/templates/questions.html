@@ -3,13 +3,13 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Trivia Game Questions</title>
+    <title>Trivia Game</title>
     <link th:href="@{/css/style.css}" rel="stylesheet" type="text/css"/>
 </head>
 <body>
 <div th:class="container">
     <div th:if="${questions}">
-        <h1>Trivia Game Questions</h1>
+        <h1>Trivia Game</h1>
         <form action="#" th:action="@{/results}" th:object="${questions}" method="post">
             <div th:each="question, iterStat : ${questions}" th:class="card">
                 <p th:text="${question.question}" th:class="question">Question text here</p>
